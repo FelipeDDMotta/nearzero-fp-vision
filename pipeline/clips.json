@@ -1,0 +1,85 @@
+[
+  {
+    "id": "street",
+    "source": "person-bicycle-car-detection.mp4",
+    "title": "Street corner",
+    "scene": "outdoor street and parking area seen from above, daytime, pedestrians, cyclists and cars",
+    "attribution": "Intel IoT DevKit sample-videos (CC BY 4.0)"
+  },
+  {
+    "id": "street-night-rain",
+    "source": "person-bicycle-car-detection.mp4",
+    "degrade": "night_rain",
+    "title": "Street corner: night + rain (synthetic)",
+    "scene": "outdoor street seen from above at night in heavy rain: low light, sensor noise, rain streaks, compression",
+    "attribution": "Derived from Intel IoT DevKit sample-videos (CC BY 4.0); synthetic degradation by NearZeroFP Vision"
+  },
+  {
+    "id": "street-dusk",
+    "source": "person-bicycle-car-detection.mp4",
+    "degrade": "dusk_glare",
+    "title": "Street corner: dusk + glare (synthetic)",
+    "scene": "outdoor street seen from above at dusk with strong lens glare and low contrast",
+    "attribution": "Derived from Intel IoT DevKit sample-videos (CC BY 4.0); synthetic degradation by NearZeroFP Vision"
+  },
+  {
+    "id": "store",
+    "source": "store-aisle-detection.mp4",
+    "title": "Retail aisle",
+    "scene": "indoor retail store aisle, ceiling camera, shoppers and shelves full of products",
+    "attribution": "Intel IoT DevKit sample-videos (CC BY 4.0)"
+  },
+  {
+    "id": "store-lowlight",
+    "source": "store-aisle-detection.mp4",
+    "degrade": "lowlight",
+    "title": "Retail aisle: low light (synthetic)",
+    "scene": "indoor retail aisle after hours: underexposed, heavy sensor noise, motion smear, low bitrate",
+    "attribution": "Derived from Intel IoT DevKit sample-videos (CC BY 4.0); synthetic degradation by NearZeroFP Vision"
+  },
+  {
+    "id": "worker-zone",
+    "source": "worker-zone-detection.mp4",
+    "title": "Industrial work zone",
+    "scene": "indoor industrial floor, workers near machinery and equipment",
+    "attribution": "Intel IoT DevKit sample-videos (CC BY 4.0)"
+  },
+  {
+    "id": "worker-zone-lowlight",
+    "source": "worker-zone-detection.mp4",
+    "degrade": "lowlight",
+    "title": "Work zone: low light (synthetic)",
+    "scene": "indoor industrial floor at night shift lighting: underexposed, noisy, motion smear",
+    "attribution": "Derived from Intel IoT DevKit sample-videos (CC BY 4.0); synthetic degradation by NearZeroFP Vision"
+  },
+  {
+    "id": "parking",
+    "source": "car-detection.mp4",
+    "title": "Parking lot",
+    "scene": "outdoor parking area, vehicles moving and parked",
+    "attribution": "Intel IoT DevKit sample-videos (CC BY 4.0)"
+  },
+  {
+    "id": "parking-rain",
+    "source": "car-detection.mp4",
+    "degrade": "night_rain",
+    "title": "Parking lot: night + rain (synthetic)",
+    "scene": "outdoor parking area at night in heavy rain: low light, rain streaks, compression",
+    "attribution": "Derived from Intel IoT DevKit sample-videos (CC BY 4.0); synthetic degradation by NearZeroFP Vision"
+  },
+  {
+    "id": "walkway",
+    "source": "people-detection.mp4",
+    "title": "Walkway",
+    "scene": "pedestrian walkway, people walking past a fixed camera",
+    "attribution": "Intel IoT DevKit sample-videos (CC BY 4.0)"
+  },
+  {
+    "id": "walkway-dusk",
+    "source": "people-detection.mp4",
+    "degrade": "dusk_glare",
+    "title": "Walkway: dusk + glare (synthetic)",
+    "scene": "pedestrian walkway at dusk with strong lens glare and low contrast",
+    "attribution": "Derived from Intel IoT DevKit sample-videos (CC BY 4.0); synthetic degradation by NearZeroFP Vision"
+  }
+]

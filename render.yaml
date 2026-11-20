@@ -1,0 +1,25 @@
+# Render Blueprint: NearZeroFP Vision API (FastAPI). The whole repo is checked out, so the API can
+# read the precomputed results and crops under apps/web/public.
+services:
+  - type: web
+    name: nearzero-fp-api
+    runtime: python
+    plan: free
+    buildCommand: pip install -r apps/api/requirements.txt
+    startCommand: cd apps/api && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: ALLOWED_ORIGINS
+        value: http://localhost:3000
+      - key: ALLOWED_ORIGIN_REGEX
+        value: https://.*\.vercel\.app
+      - key: LIVE_DAILY_CAP
+        value: "300"
+      - key: OPEN_VLM_URL
+        sync: false
+      - key: OPEN_VLM_TOKEN
+        sync: false

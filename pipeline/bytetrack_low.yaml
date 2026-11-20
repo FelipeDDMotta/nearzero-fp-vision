@@ -1,0 +1,9 @@
+# ByteTrack tuned to keep low-confidence tracks alive, so uncertain detections reach the
+# verifier agent instead of being silently thresholded away.
+tracker_type: bytetrack
+track_high_thresh: 0.2
+track_low_thresh: 0.05
+new_track_thresh: 0.1
+track_buffer: 30
+match_thresh: 0.8
+fuse_score: True
