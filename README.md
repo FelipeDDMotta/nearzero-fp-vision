@@ -34,6 +34,28 @@ genuinely unsure gets expensive reasoning. That reasoning is checked (cascade + 
 escalation), and it is **recycled into training data**, so the system gets cheaper and better
 the longer it runs.
 
+## Results (precomputed demo run)
+
+11 clips (5 public sample videos + 6 synthetic night/rain/glare/low-light variants):
+
+| | |
+|---|---|
+| Tracker tracks | 101, of which **70 (69%) were confident and alerted with no LLM call** |
+| Sent to the agent | 152 uncertain items: 31 weak tracks + 121 below-threshold candidates |
+| Auto-resolved by the agent | **90%** (53 confirmed, 84 rejected as false positives) |
+| Escalated to a human | 15 (10%) |
+| Real objects recovered below the detection threshold | **35** |
+| Operator alerts at a low threshold | **222 → 138** with the agent |
+| Cascade | 88 cases settled by `claude-haiku-5-5` alone, 64 escalated to `claude-opus-5-5` |
+| Cost | **$1.61 total**, $0.0106 per item on average ($0.0006 fast-only vs $0.024 with escalation) |
+| Latency | p50 5.0 s, p90 11.0 s per item (sequential agent loop) |
+| Audit | 16 independent audits, 0 disagreements |
+
+What the agents chose to look at: they asked for the **context view 135 times** but for other
+**track frames only 5 times**, so on single crops the missing information is usually *scene
+context*, not temporal consistency. The live demo is capped at fast-model-only calls with a
+daily dollar ceiling.
+
 ## What to click
 
 | Page | What it shows |
