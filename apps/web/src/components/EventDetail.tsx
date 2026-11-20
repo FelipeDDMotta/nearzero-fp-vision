@@ -163,7 +163,7 @@ export function EventDetail({ clipId, track, onSeek }: { clipId: string; track: 
           </div>
           {err && <p className="text-xs text-red-400">{err}</p>}
           {live && <TriageView tri={live} title={`Live result → ${STATUS_STYLE[live.status].label}`} />}
-          {!live && !err && <p className="text-[11px] text-muted">Calls the deployed API. The live result can differ slightly from the precomputed one.</p>}
+          {!live && !err && <p className="text-[11px] text-muted">Calls the deployed API. To keep the public demo cheap, the live run uses the fast model only (no strong-model escalation or audit) and has a daily budget cap. The precomputed decision above used the full cascade.</p>}
         </div>
       )}
     </div>

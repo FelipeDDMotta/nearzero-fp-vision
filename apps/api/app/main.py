@@ -23,8 +23,11 @@ from .open_vlm import OpenVLM  # noqa: E402
 from .search import Searcher  # noqa: E402
 
 PUBLIC = Path(os.getenv("PUBLIC_DIR", ROOT / "apps" / "web" / "public"))
-LIVE_DAILY_CAP = int(os.getenv("LIVE_DAILY_CAP", "300"))
-PER_IP_PER_MIN = int(os.getenv("PER_IP_PER_MIN", "8"))
+LIVE_DAILY_CAP = int(os.getenv("LIVE_DAILY_CAP", "60"))
+LIVE_BUDGET_USD = float(os.getenv("LIVE_BUDGET_USD", "0.25"))  # hard daily $ ceiling for public calls
+LIVE_ALLOW_STRONG = os.getenv("LIVE_ALLOW_STRONG", "0") == "1"  # strong model off in the public demo
+PER_IP_PER_MIN = int(os.getenv("PER_IP_PER_MIN", "3"))
+SEARCH_COST_ESTIMATE = 0.001
 
 app = FastAPI(title="NearZeroFP Vision API", version="1.0")
 app.add_middleware(
@@ -59,7 +62,7 @@ def verifier() -> Verifier:
 
 # --- cheap abuse protection for the public demo -------------------------------------------
 _hits: dict[str, deque] = defaultdict(deque)
-_day = {"date": time.strftime("%Y-%m-%d"), "count": 0}
+_day = {"date": time.strftime("%Y-%m-%d"), "count": 0, "usd": 0.0}
 
 
 def guard(request: Request) -> None:
@@ -72,9 +75,9 @@ def guard(request: Request) -> None:
         raise HTTPException(429, "Slow down: live agent calls are rate-limited for this public demo.")
     today = time.strftime("%Y-%m-%d")
     if _day["date"] != today:
-        _day.update(date=today, count=0)
-    if _day["count"] >= LIVE_DAILY_CAP:
-        raise HTTPException(429, "Daily live-call budget reached. Precomputed results are still shown.")
+        _day.update(date=today, count=0, usd=0.0)
+    if _day["count"] >= LIVE_DAILY_CAP or _day["usd"] >= LIVE_BUDGET_USD:
+        raise HTTPException(429, "Today's live-demo budget is used up. The precomputed decisions are still shown.")
     q.append(now)
     _day["count"] += 1
 
@@ -83,7 +86,9 @@ def guard(request: Request) -> None:
 @app.get("/health")
 def health() -> dict:
     return {"ok": True, "clips": list(RESULTS), "fast_model": FAST_MODEL, "strong_model": STRONG_MODEL,
-            "open_vlm": _open_vlm.available, "live_calls_today": _day["count"]}
+            "open_vlm": _open_vlm.available, "live_calls_today": _day["count"],
+            "live_usd_today": round(_day["usd"], 4), "live_budget_usd": LIVE_BUDGET_USD,
+            "live_strong_model": LIVE_ALLOW_STRONG}
 
 
 class TriageRequest(BaseModel):
@@ -106,7 +111,10 @@ def triage(body: TriageRequest, request: Request) -> dict:
         if not _open_vlm.available:
             raise HTTPException(503, "Open VLM endpoint is not configured.")
         return _open_vlm.triage(ev)
-    return verifier().triage(ev, force_audit=False)
+    record = verifier().triage(ev, allow_strong=LIVE_ALLOW_STRONG, allow_audit=False)
+    _day["usd"] += record.get("cost_usd", 0.0)
+    record["live_mode"] = "full cascade" if LIVE_ALLOW_STRONG else "fast model only (public demo budget)"
+    return record
 
 
 class SearchRequest(BaseModel):
@@ -122,6 +130,7 @@ def search(body: SearchRequest, request: Request) -> dict:
     parsed = _searcher.cached(body.q)
     if parsed is None:
         guard(request)
+        _day["usd"] += SEARCH_COST_ESTIMATE
     return _searcher.search(body.q)
 
 

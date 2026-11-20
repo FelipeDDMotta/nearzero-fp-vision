@@ -47,11 +47,13 @@ def client(tmp_path, monkeypatch):
     main = importlib.reload(main)
 
     class StubVerifier:
-        def triage(self, ev, force_audit=False):
+        def triage(self, ev, force_audit=False, allow_strong=True, allow_audit=True):
+            # the public live path must never use the strong model or the audit
+            assert allow_strong is False and allow_audit is False
             assert ev.track_id == 1 and ev.cls == "person"
             assert ev.image(ev.best)["source"]["media_type"] == "image/jpeg"
             return {"status": "rejected", "final": {"verdict": "false_positive"}, "steps": [],
-                    "cost_usd": 0.0, "latency_ms": 0}
+                    "cost_usd": 0.1, "latency_ms": 0}
 
     monkeypatch.setattr(main, "_verifier", StubVerifier())
     main._searcher._parsed["red top backpack"] = {
@@ -95,3 +97,18 @@ def test_student_parser_is_robust():
     assert ok["verdict"] == "false_positive" and ok["valid_json"]
     bad = parse_student("I think it is a person", "person")
     assert bad["verdict"] == "uncertain" and not bad["valid_json"]
+
+
+def test_daily_budget_cap_blocks_live_calls(client):
+    import app.main as main
+
+    main._hits.clear()
+    main._day.update(count=0, usd=0.0)
+    assert client.post("/triage", json={"clip_id": "demo", "track_id": 1}).status_code == 200  # spends $0.10
+    main._hits.clear()
+    assert client.post("/triage", json={"clip_id": "demo", "track_id": 1}).status_code == 200  # $0.20
+    main._hits.clear()
+    assert client.post("/triage", json={"clip_id": "demo", "track_id": 1}).status_code == 200  # $0.30 >= cap
+    main._hits.clear()
+    r = client.post("/triage", json={"clip_id": "demo", "track_id": 1})
+    assert r.status_code == 429 and "budget" in r.json()["detail"]

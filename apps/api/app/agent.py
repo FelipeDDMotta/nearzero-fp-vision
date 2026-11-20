@@ -310,17 +310,22 @@ class Verifier:
                 "cost_usd": round(_cost(model, resp.usage), 6),
                 "latency_ms": int((time.time() - t0) * 1000)}
 
-    def triage(self, ev: Evidence, force_audit: bool = False) -> dict:
-        """Cascade + audit + escalation policy. Returns the full decision record."""
+    def triage(self, ev: Evidence, force_audit: bool = False, allow_strong: bool = True,
+               allow_audit: bool = True) -> dict:
+        """Cascade + audit + escalation policy. Returns the full decision record.
+
+        The public live demo runs with allow_strong=False and allow_audit=False (fast model only),
+        so a stranger clicking around cannot run up the bill; the batch run uses the full policy.
+        """
         steps = [self.verify(ev, FAST_MODEL)]
         final = steps[0]
-        if final["verdict"] == "uncertain" or final["confidence"] < ESCALATE_BELOW:
+        if allow_strong and (final["verdict"] == "uncertain" or final["confidence"] < ESCALATE_BELOW):
             steps.append(self.verify(ev, STRONG_MODEL))
             final = steps[-1]
         audit = None
         disagreement = False
         sampled = int(ev.digest(), 16) % 1000 < AUDIT_RATE * 1000
-        if (sampled or force_audit) and final["verdict"] != "uncertain":
+        if allow_audit and (sampled or force_audit) and final["verdict"] != "uncertain":
             audit = self.audit(ev)
             disagreement = audit["verdict"] != "uncertain" and audit["verdict"] != final["verdict"]
         if final["verdict"] == "uncertain" or disagreement or final["confidence"] < HUMAN_BELOW:

@@ -18,7 +18,11 @@ services:
       - key: ALLOWED_ORIGIN_REGEX
         value: https://.*\.vercel\.app
       - key: LIVE_DAILY_CAP
-        value: "300"
+        value: "60"
+      - key: LIVE_BUDGET_USD
+        value: "0.25"
+      - key: LIVE_ALLOW_STRONG
+        value: "0"
       - key: OPEN_VLM_URL
         sync: false
       - key: OPEN_VLM_TOKEN
