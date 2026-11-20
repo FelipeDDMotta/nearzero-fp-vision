@@ -29,6 +29,7 @@ What this does:
 
 code(f"""
 !pip install -q "unsloth==2026.11.7" anthropic httpx
+!pip uninstall -y -q xformers   # T4 has no FlashAttention; xformers needs seq len % 4 == 0. Fall back to SDPA.
 !git clone -q {REPO} && echo cloned
 %cd nearzero-fp-vision
 HOLDOUT = "street-night-rain,walkway-dusk"   # cameras/conditions never seen in training
@@ -96,7 +97,7 @@ trainer = SFTTrainer(
     data_collator=UnslothVisionDataCollator(model, tokenizer),
     train_dataset=train,
     args=SFTConfig(
-        per_device_train_batch_size=2, gradient_accumulation_steps=4, warmup_steps=5,
+        per_device_train_batch_size=1, gradient_accumulation_steps=8,  # bs=1: no padding warmup_steps=5,
         num_train_epochs=2, learning_rate=2e-4, fp16=True, bf16=False,
         logging_steps=5, optim="adamw_8bit", weight_decay=0.01, lr_scheduler_type="linear",
         seed=3407, output_dir="outputs", report_to="none",

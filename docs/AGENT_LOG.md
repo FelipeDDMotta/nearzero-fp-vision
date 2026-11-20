@@ -51,3 +51,20 @@ poles read as "person") and real objects the detector nearly missed (a car at 0.
 **Takeaway.** The question isn't "is the detector right?" but "what would the operator see at the
 threshold they actually want to run?". Mining below threshold turns recall vs. precision into a
 job for the agent.
+
+---
+
+### 3. QLoRA on a free T4: `attn_bias is not correctly aligned (strideM)`
+
+**What happened.** The first Kaggle run crashed in the Qwen2.5-VL fine-tune with
+`RuntimeError: attn_bias is not correctly aligned (strideM). attn_bias.stride(2) = 494, and should be a multiple of 4`.
+T4 GPUs (compute capability 7.5) don't support FlashAttention 2, so the stack falls back to
+xformers' memory-efficient attention. xformers needs the padded sequence length to be a multiple
+of 4, and a batch of two image+text samples padded to 494 tokens broke that rule.
+
+**Fix.** Uninstall xformers so attention falls back to PyTorch SDPA, and train with
+`per_device_train_batch_size=1, gradient_accumulation_steps=8` (same effective batch, no padding).
+
+**Takeaway.** "Runs on my GPU" is hardware-specific. The cheapest accelerators often hit
+kernel-level constraints, so pin the attention backend explicitly when targeting them, which
+matters for edge deployments too.
