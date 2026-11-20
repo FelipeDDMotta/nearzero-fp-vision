@@ -151,8 +151,8 @@ export default async function LoopPage() {
           are pushed to the Hugging Face Hub.
         </Step>
         <Step n="3" t="Serve">
-          vLLM serves the base and fine-tuned models for the benchmark. The fine-tuned model also runs as a scale-to-zero GPU endpoint on Modal behind
-          the console&apos;s &quot;Open VLM&quot; toggle.
+          vLLM serves the base and fine-tuned models for the benchmark. <span className="font-mono">serving/modal_app.py</span> deploys the
+          fine-tuned model as a scale-to-zero GPU endpoint for the console&apos;s &quot;Open VLM&quot; toggle, which is active only when that endpoint is configured.
         </Step>
       </section>
 

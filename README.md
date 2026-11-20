@@ -16,9 +16,10 @@ NearZeroFP Vision is a working, deployed demo of a closed loop for edge video an
    vehicle type), so you can search footage in plain English.
 5. Agent decisions plus human labels become **training data**. A small open VLM
    (**Qwen2.5-VL-3B + QLoRA**) is distilled from the agent, benchmarked with **vLLM** on a camera it
-   never saw, and served live from a scale-to-zero GPU endpoint.
+   never saw, and packaged to serve from a scale-to-zero GPU endpoint (`serving/modal_app.py`).
 
-> Live demo: **https://nearzero-fp-vision.vercel.app** · API: Render · Student model: Hugging Face + Modal
+> Live demo: **https://nearzero-fp-vision.vercel.app** · API: Render · Student model:
+> [FelipeDdM/nearzero-fp-verifier-qwen2.5-vl-3b](https://huggingface.co/FelipeDdM/nearzero-fp-verifier-qwen2.5-vl-3b)
 > Built as an AI-engineering portfolio project in one session, with Claude Code as the coding agent.
 
 ---
@@ -109,8 +110,19 @@ docs/       AGENT_LOG.md: what broke and how it was fixed
   only) on a free Kaggle T4. The merged fp16 weights go to the Hugging Face Hub.
 - `bench_vllm.py`: vLLM serves the base and the fine-tuned model, and both are scored on the
   held-out camera. `bench_report.py` adds the Claude teacher and writes the table on `/loop`.
-- `serving/modal_app.py`: the student behind an OpenAI-compatible vLLM server on Modal. The API
+- `serving/modal_app.py`: deploys the student behind an OpenAI-compatible vLLM server on Modal. The API
   proxies to it when the console's *Open VLM* toggle is on.
+
+## Distillation result (first run)
+
+| Model (held-out clips, n=23 decidable, teacher labels) | Accuracy | FP rejected | Real kept | Latency (vLLM, T4) |
+|---|---|---|---|---|
+| Qwen2.5-VL-3B zero-shot | 70% | 10/12 | 7/11 | 361 ms |
+| Qwen2.5-VL-3B + LoRA (168 samples, 6 min on a T4) | 70% | 9/12 | 7/11 | 399 ms |
+
+The student learned the **output contract** (bare JSON, teacher-like confidence) but **not better
+judgment**: 168 samples is enough for a format, not a visual skill, and n=23 can't resolve small
+differences. Details and next steps: `docs/AGENT_LOG.md` #4.
 
 ## Run it locally (Windows or Linux)
 
