@@ -54,7 +54,7 @@ def main() -> None:
     model = YOLO(args.model)
 
     for path in sorted((PUBLIC / "results").glob("*.json")):
-        if path.stem in ("index", "bench", "human_labels") or (only and path.stem not in only):
+        if path.stem in ("index", "bench", "bench_v2", "human_labels") or (only and path.stem not in only):
             continue
         res = json.loads(path.read_text())
         res["tracks"] = [t for t in res["tracks"] if t.get("source") != "low_conf_mining"]

@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import os
 import statistics
 import subprocess
 import sys
@@ -30,8 +31,8 @@ from write_index import write_index  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
 RAW = ROOT / "data" / "raw"
-WORK = ROOT / "data" / "work"
-PUBLIC = ROOT / "apps" / "web" / "public"
+WORK = Path(os.getenv("NZ_WORK", ROOT / "data" / "work"))
+PUBLIC = Path(os.getenv("NZ_PUBLIC", ROOT / "apps" / "web" / "public"))  # v2 training data goes elsewhere
 COCO_KEEP = {0: "person", 1: "bicycle", 2: "car", 3: "motorcycle", 5: "bus", 7: "truck"}
 MAX_W = 960
 TRACK_FPS = 10
@@ -187,7 +188,7 @@ def main() -> None:
     ap.add_argument("--model", default="yolo11n.pt")
     args = ap.parse_args()
 
-    clips = json.loads((ROOT / "pipeline" / "clips.json").read_text())
+    clips = json.loads(Path(os.getenv("NZ_CLIPS", ROOT / "pipeline" / "clips.json")).read_text())
     only = {c for c in args.only.split(",") if c}
     tracker_cfg = ROOT / "pipeline" / "bytetrack_low.yaml"
     (PUBLIC / "results").mkdir(parents=True, exist_ok=True)

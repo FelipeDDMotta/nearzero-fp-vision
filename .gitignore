@@ -29,3 +29,6 @@ Thumbs.db
 
 # Generated training exports
 distill/data/
+
+# v2 intermediate outputs (videos, crops) - the training set is committed under distill/data_v2
+data/v2/

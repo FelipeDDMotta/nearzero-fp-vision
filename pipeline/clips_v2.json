@@ -1,0 +1,72 @@
+[
+  {
+    "id": "onebyone",
+    "source": "one-by-one-person-detection.mp4",
+    "title": "Corridor, one by one",
+    "scene": "indoor room with wooden floor, people walk in one at a time and stand facing away",
+    "attribution": "Intel IoT DevKit sample-videos (CC BY 4.0)",
+    "group": "onebyone"
+  },
+  {
+    "id": "onebyone-lowlight",
+    "source": "one-by-one-person-detection.mp4",
+    "degrade": "lowlight",
+    "title": "Corridor: low light (synthetic)",
+    "scene": "indoor room at night lighting: underexposed, noisy, motion smear",
+    "attribution": "Intel IoT DevKit sample-videos (CC BY 4.0)",
+    "group": "onebyone"
+  },
+  {
+    "id": "hallway",
+    "source": "face-demographics-walking.mp4",
+    "title": "Hallway",
+    "scene": "indoor office hallway, people walking toward and past the camera",
+    "attribution": "Intel IoT DevKit sample-videos (CC BY 4.0)",
+    "group": "hallway"
+  },
+  {
+    "id": "hallway-dusk",
+    "source": "face-demographics-walking.mp4",
+    "degrade": "dusk_glare",
+    "title": "Hallway: glare (synthetic)",
+    "scene": "indoor hallway with strong lens glare and low contrast",
+    "attribution": "Intel IoT DevKit sample-videos (CC BY 4.0)",
+    "group": "hallway"
+  },
+  {
+    "id": "classroom",
+    "source": "classroom.mp4",
+    "title": "Classroom",
+    "scene": "indoor classroom, several people seated at desks and walking",
+    "attribution": "Intel IoT DevKit sample-videos (CC BY 4.0)",
+    "group": "classroom"
+  },
+  {
+    "id": "classroom-lowlight",
+    "source": "classroom.mp4",
+    "degrade": "lowlight",
+    "title": "Classroom: low light (synthetic)",
+    "scene": "indoor classroom after hours: underexposed, noisy",
+    "attribution": "Intel IoT DevKit sample-videos (CC BY 4.0)",
+    "group": "classroom"
+  },
+  {
+    "id": "bolts",
+    "source": "bolt-detection.mp4",
+    "title": "Conveyor of bolts (no people)",
+    "scene": "close-up of metal bolts on a conveyor; there are NO people or vehicles in this scene",
+    "attribution": "Intel IoT DevKit sample-videos (CC BY 4.0)",
+    "group": "bolts",
+    "negative_only": true
+  },
+  {
+    "id": "bolts-lowlight",
+    "source": "bolt-detection.mp4",
+    "degrade": "lowlight",
+    "title": "Bolts: low light (synthetic, no people)",
+    "scene": "close-up of metal bolts, underexposed and noisy; there are NO people or vehicles",
+    "attribution": "Intel IoT DevKit sample-videos (CC BY 4.0)",
+    "group": "bolts",
+    "negative_only": true
+  }
+]

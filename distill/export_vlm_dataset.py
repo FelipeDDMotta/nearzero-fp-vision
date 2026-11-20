@@ -42,7 +42,7 @@ def main() -> None:
     splits: dict[str, list] = {"train": [], "test": []}
 
     for path in sorted((PUBLIC / "results").glob("*.json")):
-        if path.stem in ("bench", "human_labels", "index"):
+        if path.stem in ("bench", "bench_v2", "human_labels", "index"):
             continue
         res = json.loads(path.read_text())
         clip = res["clip"]

@@ -71,7 +71,7 @@ def main() -> None:
     cache = TriageCache(ROOT / "data" / "cache" / "triage.json")
 
     for path in sorted((PUBLIC / "results").glob("*.json")):
-        if path.stem in ("bench", "index", "human_labels") or (only and path.stem not in only):
+        if path.stem in ("bench", "bench_v2", "index", "human_labels") or (only and path.stem not in only):
             continue
         result = json.loads(path.read_text())
         todo = [t for t in result["tracks"] if t["band"] == "uncertain"]

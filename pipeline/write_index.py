@@ -5,14 +5,16 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-RESULTS = ROOT / "apps" / "web" / "public" / "results"
-ORDER = [c["id"] for c in json.loads((ROOT / "pipeline" / "clips.json").read_text())]
+import os
+
+RESULTS = Path(os.getenv("NZ_PUBLIC", ROOT / "apps" / "web" / "public")) / "results"
+ORDER = [c["id"] for c in json.loads(Path(os.getenv("NZ_CLIPS", ROOT / "pipeline" / "clips.json")).read_text())]
 
 
 def write_index() -> None:
     entries = []
     for p in RESULTS.glob("*.json"):
-        if p.stem in ("index", "bench", "human_labels"):
+        if p.stem in ("index", "bench", "bench_v2", "human_labels"):
             continue
         r = json.loads(p.read_text())
         entries.append({"clip": r["clip"], "duration": r["duration"], "summary": r.get("summary")})
