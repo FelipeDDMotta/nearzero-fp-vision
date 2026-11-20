@@ -1,0 +1,71 @@
+{
+ "holdout_clip": "street-night-rain + walkway-dusk",
+ "rows": [
+  {
+   "name": "Claude cascade (teacher)",
+   "tag": "teacher",
+   "n_scored": 23,
+   "ground_truth": "teacher",
+   "accuracy": null,
+   "fp_rejection": null,
+   "tp_retention": null,
+   "teacher_agreement": 1.0,
+   "fp_counts": "-",
+   "tp_counts": "-",
+   "valid_json": 1.0,
+   "latency_ms": 7698,
+   "usd_per_1k": 12.497,
+   "where": "Anthropic API, tool loop"
+  },
+  {
+   "name": "Qwen2.5-VL-3B (zero-shot)",
+   "tag": "base",
+   "n_scored": 23,
+   "ground_truth": "teacher",
+   "accuracy": 0.696,
+   "fp_rejection": 0.833,
+   "tp_retention": 0.636,
+   "teacher_agreement": 0.593,
+   "fp_counts": "10/12",
+   "tp_counts": "7/11",
+   "valid_json": 1.0,
+   "latency_ms": 361.1,
+   "usd_per_1k": 0.08,
+   "where": "vLLM, 1x T4 (batched)"
+  },
+  {
+   "name": "Qwen2.5-VL-3B + LoRA (distilled)",
+   "tag": "lora",
+   "n_scored": 23,
+   "ground_truth": "teacher",
+   "accuracy": 0.696,
+   "fp_rejection": 0.75,
+   "tp_retention": 0.636,
+   "teacher_agreement": 0.593,
+   "fp_counts": "9/12",
+   "tp_counts": "7/11",
+   "valid_json": 1.0,
+   "latency_ms": 398.5,
+   "usd_per_1k": 0.089,
+   "where": "vLLM, 1x T4 (batched)"
+  }
+ ],
+ "training": {
+  "base_model": "Qwen2.5-VL-3B-Instruct",
+  "method": "QLoRA 4-bit, r=16, language layers only (Unsloth)",
+  "samples": 168,
+  "epochs": 2.0,
+  "steps": 42,
+  "runtime_s": 364,
+  "loss_first": 5.33,
+  "loss_last": 0.64,
+  "hardware": "1x NVIDIA T4 (Kaggle, free)",
+  "hf_repo": "FelipeDdM/nearzero-fp-verifier-qwen2.5-vl-3b"
+ },
+ "notes": [
+  "Student models are scored on a camera they never saw during training.",
+  "Ground truth = human review labels where available, else teacher labels.",
+  "Student latency is batched throughput on one T4; teacher latency is a sequential agent loop with tool calls, so they are not directly comparable.",
+  "Items the teacher itself left 'uncertain' are excluded from accuracy (not decidable)."
+ ]
+}

@@ -68,3 +68,25 @@ of 4, and a batch of two image+text samples padded to 494 tokens broke that rule
 **Takeaway.** "Runs on my GPU" is hardware-specific. The cheapest accelerators often hit
 kernel-level constraints, so pin the attention backend explicitly when targeting them, which
 matters for edge deployments too.
+
+---
+
+### 4. The distilled student learned the format, not the judgment
+
+**What happened.** QLoRA on Qwen2.5-VL-3B (168 samples, 2 epochs, 42 steps, about 6 minutes on a free
+T4) cut the training loss from 5.3 to 0.64. On the two held-out clips it matched the zero-shot base
+model **exactly in accuracy** (16/23 decidable items each, teacher labels as ground truth). What
+changed was the **output contract**: the base wrapped its JSON in Markdown fences and reported low
+confidence (mean 0.27), while the student emits bare JSON with teacher-like confidence (mean 0.63).
+Three individual predictions flipped, with a net change of zero.
+
+**Why.** 168 samples is enough to learn a format, not a visual skill. The labels come from a teacher
+that is itself imperfect on degraded footage, and with n=23 one item moves accuracy by about 4
+points. A loss curve going down was never evidence that the judgment improved.
+
+**What I'd do next.** More and harder data (synthetic hard negatives from the degradation
+generator, more cameras), adapt the vision layers once the data supports it, use human review
+labels as ground truth, and report confidence intervals. I kept the result on the site as it is.
+
+**Takeaway.** Separate "the model learned the interface" from "the model learned the task", and
+measure the second one on data it has never seen.

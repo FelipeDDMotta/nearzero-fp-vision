@@ -6,9 +6,11 @@ interface BenchRow {
   tag: string;
   n_scored: number;
   ground_truth: string;
-  accuracy: number;
-  fp_rejection: number;
-  tp_retention: number;
+  accuracy: number | null;
+  fp_rejection: number | null;
+  tp_retention: number | null;
+  fp_counts?: string;
+  tp_counts?: string;
   teacher_agreement: number;
   valid_json: number;
   latency_ms: number;
@@ -19,9 +21,21 @@ interface Bench {
   holdout_clip: string;
   rows: BenchRow[];
   notes: string[];
+  training?: {
+    base_model: string;
+    method: string;
+    samples: number;
+    epochs: number;
+    steps: number;
+    runtime_s: number;
+    loss_first: number;
+    loss_last: number;
+    hardware: string;
+    hf_repo: string;
+  };
 }
 
-const pct = (x: number) => `${Math.round(x * 100)}%`;
+const pct = (x: number | null) => (x === null ? "is ground truth" : `${Math.round(x * 100)}%`);
 
 export default async function LoopPage() {
   const index = await readIndex();
@@ -55,7 +69,7 @@ export default async function LoopPage() {
               <table className="w-full min-w-[760px] text-sm">
                 <thead className="bg-panel-2 text-left text-xs text-muted">
                   <tr>
-                    {["Model", "Accuracy", "FP rejection", "TP retention", "Agrees w/ teacher", "Valid JSON", "Latency", "$ / 1k events", "Where"].map((h) => (
+                    {["Model", "Accuracy", "FP rejected", "Real kept", "Agrees w/ teacher", "Valid JSON", "Latency", "$ / 1k events", "Where"].map((h) => (
                       <th key={h} className="px-3 py-2 font-medium">
                         {h}
                       </th>
@@ -67,8 +81,8 @@ export default async function LoopPage() {
                     <tr key={r.tag} className={r.tag === "lora" ? "bg-accent/5" : ""}>
                       <td className="px-3 py-2 font-medium">{r.name}</td>
                       <td className="px-3 py-2 font-mono">{pct(r.accuracy)}</td>
-                      <td className="px-3 py-2 font-mono">{pct(r.fp_rejection)}</td>
-                      <td className="px-3 py-2 font-mono">{pct(r.tp_retention)}</td>
+                      <td className="px-3 py-2 font-mono">{r.fp_counts && r.fp_counts !== "-" ? r.fp_counts : pct(r.fp_rejection)}</td>
+                      <td className="px-3 py-2 font-mono">{r.tp_counts && r.tp_counts !== "-" ? r.tp_counts : pct(r.tp_retention)}</td>
                       <td className="px-3 py-2 font-mono">{pct(r.teacher_agreement)}</td>
                       <td className="px-3 py-2 font-mono">{pct(r.valid_json)}</td>
                       <td className="px-3 py-2 font-mono">{Math.round(r.latency_ms)} ms</td>
@@ -87,6 +101,38 @@ export default async function LoopPage() {
                 <li key={n}>{n}</li>
               ))}
             </ul>
+            {bench.training && (
+              <div className="mt-6 grid gap-4 md:grid-cols-2">
+                <div className="rounded-lg border border-line bg-panel p-4 text-sm">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-muted">Training run</div>
+                  <ul className="mt-2 space-y-1 text-[13px]">
+                    <li>{bench.training.base_model}, {bench.training.method}</li>
+                    <li>
+                      {bench.training.samples} samples · {bench.training.epochs} epochs · {bench.training.steps} steps · {Math.round(bench.training.runtime_s / 60)} min on{" "}
+                      {bench.training.hardware}
+                    </li>
+                    <li>
+                      Training loss {bench.training.loss_first} → <b>{bench.training.loss_last}</b>
+                    </li>
+                    <li>
+                      Weights:{" "}
+                      <a className="text-accent hover:underline" href={`https://huggingface.co/${bench.training.hf_repo}`} target="_blank" rel="noreferrer">
+                        {bench.training.hf_repo}
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+                <div className="rounded-lg border border-amber-500/40 bg-amber-500/5 p-4 text-sm">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-amber-300">What the first run taught me</div>
+                  <p className="mt-2 text-[13px] leading-relaxed text-muted">
+                    The student learned the <b className="text-text">output contract</b> (clean JSON without code fences, and teacher-like confidence, with
+                    mean confidence going from 0.27 to 0.63) but <b className="text-text">not better judgment</b>: accuracy on the held-out clips is unchanged
+                    with 168 training samples, and with n=23 one item is about 4 points. Next: more and harder data (synthetic hard negatives, more
+                    cameras), adapting the vision layers, and human labels as ground truth instead of the teacher.
+                  </p>
+                </div>
+              </div>
+            )}
           </>
         ) : (
           <div className="mt-4 rounded-lg border border-dashed border-line p-6 text-sm text-muted">
