@@ -47,15 +47,17 @@ def main() -> None:
                      "valid_json": round(sum(p["valid_json"] for p in d["preds"]) / max(1, d["n"]), 3),
                      "latency_ms": d["per_sample_ms"], "usd_per_1k": round(cost_1k, 3),
                      "where": "vLLM, 1x T4 (batched)"})
-    clip = json.loads((PUBLIC / "results" / f"{args.holdout}.json").read_text())
-    tri = [t["triage"] for t in clip["tracks"] if t.get("triage")]
+    tri = []
+    for cid in args.holdout.split(","):
+        clip = json.loads((PUBLIC / "results" / f"{cid.strip()}.json").read_text())
+        tri += [t["triage"] for t in clip["tracks"] if t.get("triage")]
     if teacher_preds is not None and tri:
         lat = sorted(r["latency_ms"] for r in tri)[len(tri) // 2]
         rows.insert(0, {"name": "Claude cascade (teacher)", "tag": "teacher", **metrics(teacher_preds),
                         "valid_json": 1.0, "latency_ms": lat,
                         "usd_per_1k": round(1000 * sum(r["cost_usd"] for r in tri) / len(tri), 3),
                         "where": "Anthropic API, tool loop"})
-    bench = {"holdout_clip": args.holdout, "rows": rows,
+    bench = {"holdout_clip": args.holdout.replace(",", " + "), "rows": rows,
              "notes": ["Student models are scored on a camera they never saw during training.",
                        "Ground truth = human review labels where available, else teacher labels.",
                        "Student latency is batched throughput on one T4; teacher latency is a "

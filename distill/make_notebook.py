@@ -31,7 +31,7 @@ code(f"""
 !pip install -q "unsloth==2026.11.7" anthropic httpx
 !git clone -q {REPO} && echo cloned
 %cd nearzero-fp-vision
-HOLDOUT = "street-night-rain"   # camera never seen in training
+HOLDOUT = "street-night-rain,walkway-dusk"   # cameras/conditions never seen in training
 HF_REPO = "FelipeDDMotta/nearzero-fp-verifier-qwen2.5-vl-3b"  # change to your HF username
 BASE = "unsloth/Qwen2.5-VL-3B-Instruct"
 !python distill/export_vlm_dataset.py --holdout {{HOLDOUT}}

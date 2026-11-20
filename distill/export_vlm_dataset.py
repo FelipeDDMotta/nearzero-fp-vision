@@ -30,8 +30,9 @@ OUT = ROOT / "distill" / "data"
 
 def main() -> None:
     ap = argparse.ArgumentParser()
-    ap.add_argument("--holdout", required=True, help="clip id kept out of training")
+    ap.add_argument("--holdout", required=True, help="comma-separated clip ids kept out of training")
     args = ap.parse_args()
+    holdout = {c.strip() for c in args.holdout.split(",") if c.strip()}
 
     human_path = PUBLIC / "results" / "human_labels.json"
     human = json.loads(human_path.read_text()) if human_path.exists() else {}
@@ -41,11 +42,11 @@ def main() -> None:
     splits: dict[str, list] = {"train": [], "test": []}
 
     for path in sorted((PUBLIC / "results").glob("*.json")):
-        if path.stem in ("bench", "human_labels"):
+        if path.stem in ("bench", "human_labels", "index"):
             continue
         res = json.loads(path.read_text())
         clip = res["clip"]
-        split = "test" if clip["id"] == args.holdout else "train"
+        split = "test" if clip["id"] in holdout else "train"
         for t in res["tracks"]:
             tri = t.get("triage")
             if not tri:
@@ -80,6 +81,8 @@ def main() -> None:
             if split == "train":
                 # Augmentation: other frames of the same track are new views with the same label.
                 for k, rel in enumerate(ev.frames):
+                    if rel == ev.best:
+                        continue  # single-frame candidates have no extra views
                     dst = OUT / "images" / rel.replace("crops/", "")
                     dst.parent.mkdir(parents=True, exist_ok=True)
                     shutil.copyfile(PUBLIC / rel, dst)
@@ -89,7 +92,7 @@ def main() -> None:
                         "teacher": tri["final"]["verdict"], "teacher_status": tri["status"],
                     })
 
-    assert not {r["id"].split(":")[0] for r in splits["train"]} & {args.holdout}, "holdout leaked into train"
+    assert not {r["id"].split(":")[0] for r in splits["train"]} & holdout, "holdout leaked into train"
     for name, rows in splits.items():
         (OUT / f"{name}.jsonl").write_text("\n".join(json.dumps(r) for r in rows))
         dist = Counter(json.loads(r["target"])["verdict"] for r in rows)
