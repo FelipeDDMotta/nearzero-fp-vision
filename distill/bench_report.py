@@ -37,8 +37,16 @@ def main() -> None:
     args = ap.parse_args()
     rows = []
     teacher_preds = None
+    # Human labels collected after training (review page export) override the ground truth here,
+    # so labelling the held-out clips never has to wait for, or touch, the training run.
+    hp = PUBLIC / "results" / "human_labels.json"
+    human = {k: v for k, v in (json.loads(hp.read_text()) if hp.exists() else {}).items()
+             if v.get("verdict") in ("true_positive", "false_positive")}
     for f in sorted(OUT.glob("pred_*.json")):
         d = json.loads(f.read_text())
+        for p in d["preds"]:
+            if p["id"] in human:
+                p["target"], p["label_source"] = human[p["id"]]["verdict"], "human"
         m = metrics(d["preds"])
         teacher_preds = teacher_preds or [{**p, "pred": p["teacher"]} for p in d["preds"]]
         cost_1k = L4_USD_PER_HOUR / 3600 * d["per_sample_ms"] / 1000 * 1000
