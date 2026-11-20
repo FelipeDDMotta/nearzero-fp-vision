@@ -5,7 +5,7 @@ Scale-to-zero GPU endpoint with an OpenAI-compatible API, protected by a bearer 
 Setup (once):
   pip install modal && modal setup
   modal secret create nearzero-vlm VLLM_API_KEY=<random-string>
-  STUDENT_MODEL=<hf-user>/nearzero-fp-verifier-qwen2.5-vl-3b modal deploy serving/modal_app.py
+  STUDENT_MODEL=FelipeDdM/nearzero-fp-verifier-qwen2.5-vl-3b modal deploy serving/modal_app.py
 Then set on Render: OPEN_VLM_URL=<printed url>, OPEN_VLM_TOKEN=<same random string>.
 """
 import os
