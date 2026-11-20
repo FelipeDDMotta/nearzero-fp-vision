@@ -42,7 +42,7 @@ app.add_middleware(
 def load_results() -> dict[str, dict]:
     out = {}
     for p in sorted((PUBLIC / "results").glob("*.json")):
-        if p.stem != "bench":
+        if p.stem not in ("bench", "index", "human_labels"):
             out[p.stem] = json.loads(p.read_text())
     return out
 

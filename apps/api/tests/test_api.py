@@ -41,6 +41,9 @@ def client(tmp_path, monkeypatch):
     clip = {"clip": {"id": "demo", "title": "Demo", "scene": "test scene", "attribution": "", "video": ""},
             "fps": 10, "width": 100, "height": 100, "duration": 3, "tracks": [track]}
     (public / "results" / "demo.json").write_text(json.dumps(clip))
+    # non-clip files that live next to the results must be ignored by the API
+    (public / "results" / "index.json").write_text(json.dumps([{"clip": clip["clip"], "duration": 3}]))
+    (public / "results" / "bench.json").write_text(json.dumps({"rows": []}))
     monkeypatch.setenv("PUBLIC_DIR", str(public))
     monkeypatch.setenv("ANTHROPIC_API_KEY", "test")
     import app.main as main
@@ -112,3 +115,13 @@ def test_daily_budget_cap_blocks_live_calls(client):
     main._hits.clear()
     r = client.post("/triage", json={"clip_id": "demo", "track_id": 1})
     assert r.status_code == 429 and "budget" in r.json()["detail"]
+
+
+def test_dataset_export_zip(client):
+    import io
+    import zipfile
+
+    r = client.get("/dataset/export")
+    assert r.status_code == 200
+    names = zipfile.ZipFile(io.BytesIO(r.content)).namelist()
+    assert "manifest.jsonl" in names and any(n.startswith("classifier/true/person/") for n in names)
