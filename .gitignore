@@ -19,7 +19,7 @@ data/cache/
 # Node
 node_modules/
 .next/
-out/
+apps/web/out/
 .vercel/
 
 # OS / editors

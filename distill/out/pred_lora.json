@@ -1,0 +1,280 @@
+{
+ "tag": "lora",
+ "model": "./merged",
+ "n": 27,
+ "wall_s": 10.76,
+ "per_sample_ms": 398.5,
+ "output_tokens_per_s": 208.1,
+ "preds": [
+  {
+   "id": "street-night-rain:27",
+   "pred": "true_positive",
+   "confidence": 0.7,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"true_positive\", \"corrected_class\": \"person\", \"confidence\": 0.7, \"reason\": \"The crop shows a dark, elongated shape with a head and shoulders, consistent with a person walking in the rain. The context view shows the shape is in the middle of the frame, with a dark, rain-smeared background",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:48",
+   "pred": "true_positive",
+   "confidence": 0.7,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"true_positive\", \"corrected_class\": \"car\", \"confidence\": 0.7, \"reason\": \"The crop shows a white car with a roof rack, a rear window, and a visible license plate, consistent with a real car in a parking area at night.\"}",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:51",
+   "pred": "true_positive",
+   "confidence": 0.75,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"true_positive\", \"corrected_class\": \"car\", \"confidence\": 0.75, \"reason\": \"The crop shows a real car with a roof, windshield, and headlights, consistent with a real vehicle in a street scene at night. The context view shows the car in the frame, so the detector correctly identified it as ",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:100000",
+   "pred": "false_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"false_positive\", \"corrected_class\": \"none\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark, elongated shape with a smooth, curved edge, but no head, limbs, or human body. It looks like a rain streak or a shadow on the road, not a person.\"}",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "street-night-rain:100001",
+   "pred": "true_positive",
+   "confidence": 0.7,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"true_positive\", \"corrected_class\": \"car\", \"confidence\": 0.7, \"reason\": \"The crop shows a white car with a dark roof and windows, a typical car shape, and a roof rack. The context view shows the car in a parking space, with a white line and a dark road, consistent with a parked car. The ",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:100002",
+   "pred": "false_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"false_positive\", \"corrected_class\": \"none\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark vertical line, a rain streak, and a small white spot, not a person. The track is short and the context view shows no head or body, only a dark vertical line. The low light and rain streaks ma",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "street-night-rain:100003",
+   "pred": "false_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"false_positive\", \"corrected_class\": \"none\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark, blurry shape on a road, with no clear head, body, or legs. It looks like a shadow or a dark spot on the road, not a person. The context view shows a single dark spot on the road, not a perso",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:100004",
+   "pred": "false_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"false_positive\", \"corrected_class\": \"none\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark, elongated shape with a blurred, indistinct head and shoulders, but no clear human body or head. It looks like a shadow or a dark object on the ground, not a person.\"}",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:100005",
+   "pred": "false_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"false_positive\", \"corrected_class\": \"none\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark, elongated shape with a few vertical lines, but no head, limbs, or human body parts. It looks like a shadow or a rain streak rather than a person.\"}",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:100006",
+   "pred": "false_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"false_positive\", \"corrected_class\": \"none\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark, elongated shape with a few vertical lines, but no head, limbs, or human body. It looks like a shadow or a rain streak rather than a person.\"}",
+   "target": "uncertain",
+   "label_source": "teacher-escalated",
+   "teacher": "uncertain"
+  },
+  {
+   "id": "street-night-rain:100007",
+   "pred": "false_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"false_positive\", \"corrected_class\": \"none\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark, elongated shape with a small, indistinct head and limbs, but no human body or head. It looks like a shadow or a rain streak, not a person.\"}",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "street-night-rain:100008",
+   "pred": "false_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"false_positive\", \"corrected_class\": \"none\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark blob on a road, but it's too small and blurry to be a person. It looks like a shadow or a rain streak, not a human figure.\"}",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "street-night-rain:100009",
+   "pred": "false_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"false_positive\", \"corrected_class\": \"none\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark, elongated shape with no head, limbs, or clothing, and the context view shows it's a dark, wet road surface with no person. The low light and rain streaks make it hard to be certain, but the ",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "street-night-rain:100010",
+   "pred": "true_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"true_positive\", \"corrected_class\": \"car\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark, elongated shape with a smooth, curved roof and a rear window, consistent with a car's roof and rear window. The context view shows a dark, elongated shape with a smooth, curved roof and a rear",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:100011",
+   "pred": "false_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"false_positive\", \"corrected_class\": \"none\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark, blurry shape with no clear head, torso, or limbs. It looks like a shadow or a rain streak rather than a person. The low light and rain streaks make it hard to be certain.\"}",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "street-night-rain:100012",
+   "pred": "false_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"false_positive\", \"corrected_class\": \"none\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark, elongated shape with no head, limbs, or clothing, and the context view shows a dark, rain streaked road with no person. It looks like a rain streak or a shadow rather than a real person.\"}",
+   "target": "uncertain",
+   "label_source": "teacher-escalated",
+   "teacher": "uncertain"
+  },
+  {
+   "id": "street-night-rain:100013",
+   "pred": "false_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"false_positive\", \"corrected_class\": \"none\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark, elongated shape with a few vertical lines, but no head, limbs, or body. It looks like a shadow or a rain streak rather than a person.\"}",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:100014",
+   "pred": "false_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"false_positive\", \"corrected_class\": \"none\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark, blurry shape with no clear vehicle features, only a faint outline of a wheel and a dark blob that could be a tree or a shadow. The context view shows a dark, wet road with no vehicle or road",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "street-night-rain:100015",
+   "pred": "true_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"true_positive\", \"corrected_class\": \"person\", \"confidence\": 0.6, \"reason\": \"The context view shows a dark figure with a head and shoulders, a bicycle, and a hand holding a phone, consistent with a person riding a bike at night. The tight crop shows a dark shape with a head and shoulders,",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:100016",
+   "pred": "false_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"false_positive\", \"corrected_class\": \"none\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark, elongated shape with no head, limbs, or clothing, and the context view shows it's a dark shadow on the wet road, not a person.\"}",
+   "target": "uncertain",
+   "label_source": "teacher-escalated",
+   "teacher": "uncertain"
+  },
+  {
+   "id": "walkway-dusk:41",
+   "pred": "true_positive",
+   "confidence": 0.7,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"true_positive\", \"corrected_class\": \"person\", \"confidence\": 0.7, \"reason\": \"The crop shows a dark, elongated shape with a vertical stripe, consistent with a person's silhouette against a light background, such as a streetlight or a light source behind the camera. The context view shows a",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "walkway-dusk:51",
+   "pred": "true_positive",
+   "confidence": 0.8,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"true_positive\", \"corrected_class\": \"person\", \"confidence\": 0.8, \"reason\": \"The crop shows a person in a white shirt and dark pants, standing in a room with a window and a door frame. The context view shows the person from the side, with a yellow box around them, so the detection is conf",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "walkway-dusk:100000",
+   "pred": "false_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"false_positive\", \"corrected_class\": \"none\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark vertical line on a wooden floor, not a person. The context view shows a dark vertical line on a wooden floor, not a person. The low contrast and glare make it hard to be certain, but the crop",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "walkway-dusk:100001",
+   "pred": "true_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"true_positive\", \"corrected_class\": \"person\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark, elongated shape with a smooth, curved edge, consistent with a person's silhouette in a low-light, glare-filled scene. The context view shows the shape is a person walking, with a head and s",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "walkway-dusk:100002",
+   "pred": "true_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"true_positive\", \"corrected_class\": \"person\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark, elongated shape on a light floor, consistent with a person's lower body, legs, and feet. The context view shows a person's legs and feet in a dark outfit, walking on a light floor, which ma",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "walkway-dusk:100003",
+   "pred": "false_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"false_positive\", \"corrected_class\": \"none\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark vertical line on a dark surface, likely a shadow or a part of the camera's sensor, not a person.\"}",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "walkway-dusk:100004",
+   "pred": "false_positive",
+   "confidence": 0.6,
+   "valid_json": true,
+   "raw": "{\"verdict\": \"false_positive\", \"corrected_class\": \"none\", \"confidence\": 0.6, \"reason\": \"The crop shows a dark, blurry shape on a floor, with no head, limbs, or clothing. It looks like a shadow or a small object, not a person.\"}",
+   "target": "uncertain",
+   "label_source": "teacher-escalated",
+   "teacher": "uncertain"
+  }
+ ]
+}

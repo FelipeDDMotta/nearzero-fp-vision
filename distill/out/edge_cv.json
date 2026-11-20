@@ -1,0 +1,88 @@
+{
+ "model": "MobileNetV3-Large (ImageNet, frozen) + logistic regression",
+ "params_m": 5.4,
+ "cpu_ms_per_image": 44.2,
+ "n_samples": 1020,
+ "cv_leave_one_video_out": {
+  "total": {
+   "hard_n": 141,
+   "hard_acc": 0.652,
+   "easy_n": 605,
+   "easy_acc": 0.868,
+   "hard_fp_rejected": "59/88",
+   "hard_real_kept": "33/53"
+  },
+  "per_fold": {
+   "bolts": {
+    "hard_n": 4,
+    "hard_acc": 1.0,
+    "easy_n": 50,
+    "easy_acc": 1.0,
+    "hard_fp_rejected": "4/4",
+    "hard_real_kept": "0/0"
+   },
+   "parking": {
+    "hard_n": 18,
+    "hard_acc": 0.778,
+    "easy_n": 54,
+    "easy_acc": 0.963,
+    "hard_fp_rejected": "4/5",
+    "hard_real_kept": "10/13"
+   },
+   "store": {
+    "hard_n": 46,
+    "hard_acc": 0.565,
+    "easy_n": 138,
+    "easy_acc": 0.783,
+    "hard_fp_rejected": "8/27",
+    "hard_real_kept": "18/19"
+   },
+   "street": {
+    "hard_n": 33,
+    "hard_acc": 0.515,
+    "easy_n": 143,
+    "easy_acc": 0.734,
+    "hard_fp_rejected": "13/13",
+    "hard_real_kept": "4/20"
+   },
+   "walkway": {
+    "hard_n": 11,
+    "hard_acc": 0.909,
+    "easy_n": 122,
+    "easy_acc": 0.926,
+    "hard_fp_rejected": "9/10",
+    "hard_real_kept": "1/1"
+   },
+   "worker": {
+    "hard_n": 29,
+    "hard_acc": 0.724,
+    "easy_n": 98,
+    "easy_acc": 0.99,
+    "hard_fp_rejected": "21/29",
+    "hard_real_kept": "0/0"
+   }
+  }
+ },
+ "fixed_split": {
+  "test_groups": [
+   "street",
+   "walkway"
+  ],
+  "all": {
+   "hard_n": 44,
+   "hard_acc": 0.659,
+   "easy_n": 265,
+   "easy_acc": 0.8,
+   "hard_fp_rejected": "23/23",
+   "hard_real_kept": "6/21"
+  },
+  "agent_labelled_only": {
+   "hard_n": 44,
+   "hard_acc": 0.659,
+   "easy_n": 0,
+   "easy_acc": 0.0,
+   "hard_fp_rejected": "23/23",
+   "hard_real_kept": "6/21"
+  }
+ }
+}

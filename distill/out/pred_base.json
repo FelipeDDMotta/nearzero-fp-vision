@@ -1,0 +1,280 @@
+{
+ "tag": "base",
+ "model": "unsloth/Qwen2.5-VL-3B-Instruct",
+ "n": 27,
+ "wall_s": 9.75,
+ "per_sample_ms": 361.1,
+ "output_tokens_per_s": 231.3,
+ "preds": [
+  {
+   "id": "street-night-rain:27",
+   "pred": "true_positive",
+   "confidence": 0.52,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"true_positive\",\n  \"corrected_class\": \"person\",\n  \"confidence\": 0.52,\n  \"reason\": \"The detector correctly identifies the person in the context view, and the track score suggests a high likelihood of the person being present in the scene.\"\n}\n```",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:48",
+   "pred": "true_positive",
+   "confidence": 0.8,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"true_positive\",\n  \"corrected_class\": \"car\",\n  \"confidence\": 0.8,\n  \"reason\": \"The car is clearly visible in the image, with distinct features such as windows, doors, and wheels. The track score of 0.28 over 3 frames over 0.5 seconds suggests that the car is a true positive de",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:51",
+   "pred": "true_positive",
+   "confidence": 0.58,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"true_positive\",\n  \"corrected_class\": \"car\",\n  \"confidence\": 0.58,\n  \"reason\": \"The detector correctly identifies the car in the image, with a track score of 0.58 over 15 frames over 2.2 seconds, indicating a high likelihood of the car being present in the scene.\"\n}\n```",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:100000",
+   "pred": "false_positive",
+   "confidence": 0.0,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"background\",\n  \"confidence\": 0.0,\n  \"reason\": \"The detector claim indicates a person with a track score of 0.05, which is very low. The context view shows rain streaks and compression, which are common in outdoor street scenes at night i",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "street-night-rain:100001",
+   "pred": "true_positive",
+   "confidence": 0.95,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"true_positive\",\n  \"corrected_class\": \"car\",\n  \"confidence\": 0.95,\n  \"reason\": \"The object in the image is a car, as indicated by the bounding box and the context view. The track score of 0.05 suggests a high confidence in the detection.\"\n}\n```",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:100002",
+   "pred": "false_positive",
+   "confidence": 0.0,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"background\",\n  \"confidence\": 0.0,\n  \"reason\": \"The detector claim indicates a person with a track score of 0.04, which is very low. The context view shows rain streaks and compression, which are common in outdoor street scenes at night i",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "street-night-rain:100003",
+   "pred": "uncertain",
+   "confidence": 0.05,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"uncertain\",\n  \"corrected_class\": \"false_positive\",\n  \"confidence\": 0.05,\n  \"reason\": \"The detection is uncertain due to the low light conditions, sensor noise, and rain streaks. The track score of 0.07 is very low, indicating a weak detection. The context view (image 2) does ",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:100004",
+   "pred": "false_positive",
+   "confidence": 0.0,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"bicycle\",\n  \"confidence\": 0.0,\n  \"reason\": \"The bounding box is highlighted in yellow, indicating a false positive detection. The image shows a bicycle, not a person, and the context view (image 2) confirms this.\"\n}\n```",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:100005",
+   "pred": "false_positive",
+   "confidence": 0.0,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"object\",\n  \"confidence\": 0.0,\n  \"reason\": \"The object in the image appears to be a bicycle, but the low light, sensor noise, and rain streaks make it difficult to confidently identify a person. The track score of 0.10 is very low, indica",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:100006",
+   "pred": "false_positive",
+   "confidence": 0.0,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"object\",\n  \"confidence\": 0.0,\n  \"reason\": \"The object in the image appears to be a car, but the low light, sensor noise, and rain streaks make it difficult to confidently identify the object as a person. The track score of 0.05 is very l",
+   "target": "uncertain",
+   "label_source": "teacher-escalated",
+   "teacher": "uncertain"
+  },
+  {
+   "id": "street-night-rain:100007",
+   "pred": "false_positive",
+   "confidence": 0.0,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"object\",\n  \"confidence\": 0.0,\n  \"reason\": \"The object detected in the image appears to be a small, indistinct object that could be a raindrop or a small piece of debris, not a person.\"\n}\n```",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "street-night-rain:100008",
+   "pred": "false_positive",
+   "confidence": 0.05,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"object\",\n  \"confidence\": 0.05,\n  \"reason\": \"The object detected has a low track score and is not a person. The context view shows it is not a person.\"\n}\n```",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "street-night-rain:100009",
+   "pred": "false_positive",
+   "confidence": 0.0,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"background\",\n  \"confidence\": 0.0,\n  \"reason\": \"The object detected in the image is a person, but the context view shows it is not a person. The low light, sensor noise, and rain streaks make it difficult to accurately identify the object",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "street-night-rain:100010",
+   "pred": "true_positive",
+   "confidence": 0.12,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"true_positive\",\n  \"corrected_class\": \"car\",\n  \"confidence\": 0.12,\n  \"reason\": \"The detector correctly identified the car in the context view, and the track score is above the threshold of 0.0, indicating a positive detection.\"\n}\n```",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:100011",
+   "pred": "false_positive",
+   "confidence": 0.0,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"background\",\n  \"confidence\": 0.0,\n  \"reason\": \"The image shows heavy rain and low light conditions, making it difficult to identify any specific objects or individuals. The detector claim of a person with a track score of 0.10 is likely ",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "street-night-rain:100012",
+   "pred": "false_positive",
+   "confidence": 0.23,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"object\",\n  \"confidence\": 0.23,\n  \"reason\": \"The detector claim indicates a low confidence score (0.23) and a track score, which suggests that the object is not a person but rather an object in the scene. The context view shows a dark, in",
+   "target": "uncertain",
+   "label_source": "teacher-escalated",
+   "teacher": "uncertain"
+  },
+  {
+   "id": "street-night-rain:100013",
+   "pred": "false_positive",
+   "confidence": 0.0,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"object\",\n  \"confidence\": 0.0,\n  \"reason\": \"The object appears to be a small, indistinct shape that does not match the description of a person. The low light, sensor noise, and rain streaks make it difficult to identify the object with ce",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:100014",
+   "pred": "false_positive",
+   "confidence": 0.0,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"person\",\n  \"confidence\": 0.0,\n  \"reason\": \"The detector claim is for a car, but the image does not show a car. The context view (yellow box) shows a person, not a car.\"\n}\n```",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "street-night-rain:100015",
+   "pred": "false_positive",
+   "confidence": 0.21,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"object\",\n  \"confidence\": 0.21,\n  \"reason\": \"The detector claim indicates a person, but the context view shows a bicycle, which is not a person. The low light, sensor noise, and rain streaks in the image make it difficult to confidently i",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "street-night-rain:100016",
+   "pred": "false_positive",
+   "confidence": 0.18,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"person\",\n  \"confidence\": 0.18,\n  \"reason\": \"The detector claim indicates a low confidence score (0.18) and a track score, which suggests that the detection is uncertain. The context view shows a person in the frame, but the low light, se",
+   "target": "uncertain",
+   "label_source": "teacher-escalated",
+   "teacher": "uncertain"
+  },
+  {
+   "id": "walkway-dusk:41",
+   "pred": "true_positive",
+   "confidence": 0.52,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"true_positive\",\n  \"corrected_class\": \"person\",\n  \"confidence\": 0.52,\n  \"reason\": \"The detector claim indicates a person with a track score of 0.52 over 2.0 seconds, which is a reasonable confidence level for a pedestrian in a low-contrast environment like dusk. The context vi",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "walkway-dusk:51",
+   "pred": "true_positive",
+   "confidence": 0.78,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"true_positive\",\n  \"corrected_class\": \"person\",\n  \"confidence\": 0.78,\n  \"reason\": \"The person is clearly visible and the track score is high, indicating a strong detection.\"\n}\n```",
+   "target": "true_positive",
+   "label_source": "teacher",
+   "teacher": "true_positive"
+  },
+  {
+   "id": "walkway-dusk:100000",
+   "pred": "false_positive",
+   "confidence": 0.95,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"background\",\n  \"confidence\": 0.95,\n  \"reason\": \"The object in the image is a part of the walkway, not a person. The low contrast and strong lens glare make it difficult to confidently identify a person.\"\n}\n```",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "walkway-dusk:100001",
+   "pred": "false_positive",
+   "confidence": 0.23,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"background\",\n  \"confidence\": 0.23,\n  \"reason\": \"The object detected in the image is likely a part of the walkway or a reflection, not a person. The low contrast and strong lens glare make it difficult to confidently identify a person.\"\n}",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "walkway-dusk:100002",
+   "pred": "true_positive",
+   "confidence": 0.07,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"true_positive\",\n  \"corrected_class\": \"person\",\n  \"confidence\": 0.07,\n  \"reason\": \"The bounding box in the image is consistent with the description of a person walking on a pedestrian walkway at dusk, with strong lens glare and low contrast.\"\n}\n```",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "walkway-dusk:100003",
+   "pred": "false_positive",
+   "confidence": 0.18,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"false_positive\",\n  \"confidence\": 0.18,\n  \"reason\": \"The detection score is low (0.18), and the image context suggests it is not a person.\"\n}\n```",
+   "target": "false_positive",
+   "label_source": "teacher",
+   "teacher": "false_positive"
+  },
+  {
+   "id": "walkway-dusk:100004",
+   "pred": "false_positive",
+   "confidence": 0.9,
+   "valid_json": true,
+   "raw": "```json\n{\n  \"verdict\": \"false_positive\",\n  \"corrected_class\": \"background\",\n  \"confidence\": 0.9,\n  \"reason\": \"The image shows a pedestrian walkway at dusk with strong lens glare and low contrast. The person detected in the tight crop does not match the typical appearance of a pedestrian, and the low",
+   "target": "uncertain",
+   "label_source": "teacher-escalated",
+   "teacher": "uncertain"
+  }
+ ]
+}
